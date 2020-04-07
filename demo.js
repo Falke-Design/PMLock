@@ -12,7 +12,7 @@ const mapboxTiles1 = L.tileLayer(
   }
 );
 
-const map2 = L.map('example2')
+const map = L.map('example2')
   .setView([51.505, -0.09], 13)
   .addLayer(mapboxTiles1);
 
@@ -20,10 +20,10 @@ const m1 = L.circleMarker([51.50313, -0.091223], { radius: 10 });
 const m2 = L.marker([51.50614, -0.0989]);
 const m3 = L.marker([51.50915, -0.096112], { pmIgnore: true });
 
-const mGroup = L.layerGroup([m1, m2, m3]).addTo(map2);
+const mGroup = L.layerGroup([m1, m2, m3]).addTo(map);
 // mGroup.pm.enable();
 
-map2.pm.addControls();
+map.pm.addControls();
 
 // GEOSJON EXAMPLE
 const geoJsonData = {
@@ -122,13 +122,13 @@ const theCollection = L.geoJson(geoJsonData, {
     }
   },
   // onEachFeature: (feature, layer) => {
-  //     layer.addTo(map2);
+  //     layer.addTo(map);
   // },
 });
 
-theCollection.addTo(map2);
+theCollection.addTo(map);
 
 const b = theCollection.getBounds();
-map2.fitBounds(b);
+map.fitBounds(b);
 
-new L.PMLock(map2);
+x = new L.PMLock(map,{showControl: true});
