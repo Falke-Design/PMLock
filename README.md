@@ -1,7 +1,7 @@
 # PMLock
 Leaflet Geoman Subplugin - PMLock: Lock / Unlock Layers
 
-Demo: https://falke-design.github.io/PMLock/
+Demo: [PMLock](https://falke-design.github.io/PMLock/)
 
 `<script src="./src/js/pmLock.js"></script>`
 
