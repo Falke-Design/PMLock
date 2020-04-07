@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Leaflet Geoman Subplugin - Lock / Unlock Layers</title>
+    <title>Leaflet PMLock: Lock / Unlock Layers</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@geoman-io/leaflet-geoman-free@2.5.0/dist/leaflet-geoman.css">
     <link rel="stylesheet" href="demo.css" />
@@ -11,16 +11,68 @@
 </head>
 
 <body>
-
+    <a href="https://github.com/Falke-Design/PMLock"><img src="./img/github-corner.png" class="githubcorner"/></a>
     <div class="wrapper">
 
         <article>
-            <h1>Leaflet Geoman Subplugin - PMLock: Lock / Unlock Layers</h1>
-            <span>All Cricles are by default locked, you can't move or edit or delete them.</span>
-            <br>
-            <span>Github: <a href="https://github.com/geoman-io/leaflet-geoman">Leaflet Geoman</a><span style="margin-left: 30px;"></span><a href="#">PMLock</a></span>
-            <br>
+            <h1 style="margin-bottom: 10px;">Leaflet <a href="https://github.com/Falke-Design/PMLock">PMLock</a>: Lock / Unlock Layers</h1>
+            <span style="display: block;font-size: 19px;margin-bottom: 20px;">This is a <a href="https://github.com/geoman-io/leaflet-geoman">Leaflet Geoman</a> Subplugin</span>
+            <span>In the example all circles are by default locked, you can't move, edit or delete them.</span>
             <div class="map" id="example2"></div>
+        </article>
+        <article>
+            <br>
+            <h3><strong>Installation</strong></h3>
+            <span>Download <a href="https://raw.githubusercontent.com/Falke-Design/PMLock/master/src/js/pmLock.js">pmLock.js</a> and include them in your project.</span>
+            <pre>&lt;script src="./src/js/pmLock.js"&gt;&lt;/script&gt;</pre>
+            <br>
+            <h3><strong>Init PMLock</strong></h3>
+            <span>Create the PMLock button after Leaflet-Geoman</span>
+            <pre>new PMLock(map)</pre>
+            <span>You can add the library without the button:</span>
+            <pre>new PMLock(map,{showControl: false)</pre>
+
+            <span><strong>Options</strong></span>
+            <div>
+                <pre>pmLock.setOptions(options)</pre>
+                <pre>showControl: true | false</pre>
+                <pre>text: {unlock: 'Unlock', lock: 'Lock', title: 'Lock / Unlock Layers',  finish: 'Finish'}</pre>
+            </div>
+            <span><strong>setText</strong></span>
+            <div>
+                <pre>pmLock.setText(text)</pre>
+                <pre>text: {unlock: 'Unlock', lock: 'Lock', title: 'Lock / Unlock Layers',  finish: 'Finish'}</pre>
+            </div>
+            <span><strong>enableLock</strong></span>
+            <div>
+                <pre>pmLock.enableLock(name, changeToolbar = true)</pre>
+                <pre>name: 'unlock' | 'lock' | '' </pre>
+            </div>
+            <span><strong>disableLock</strong></span>
+            <div>
+                <pre>pmLock.disableLock(changeToolbar = true)</pre>
+            </div>
+            <br>
+            <span><strong>toggle</strong></span>
+            <div>
+                <span>enable 'lock' | 'unlock' or disable all ' '</span>
+                <pre>pmLock.toggle(name = 'lock', changeToolbar=true)</pre>
+            </div>
+            <br>
+            <span><strong>render()</strong></span>
+            <div>
+                <pre>pmLock.render()</pre>
+            </div>
+            <br>
+            <span><strong>getLockedLayers()</strong></span>
+            <div>
+                <pre>pmLock.getLockedLayers()</pre>
+            </div>
+            <br>
+            <span><strong>getUnlockedLayers()</strong></span>
+            <div>
+                <pre>pmLock.getUnlockedLayers()</pre>
+            </div>
         </article>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@geoman-io/leaflet-geoman-free@2.5.0/dist/leaflet-geoman.min.js"></script>

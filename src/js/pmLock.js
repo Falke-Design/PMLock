@@ -1,28 +1,46 @@
 L.PMLock = L.Class.extend({
     options: {
-        position: 'topleft',
+        position: undefined,
         text: {
             unlock: "Unlock",
             lock: "Lock",
             title: "Lock / Unlock Layers",
             finish: "Finish"
-        }
+        },
+        showControl: true,
     },
     activeMode: '',
-    addControl: true,
     toolbarBtn: undefined,
+    cssadded: false,
     initialize(map, options) {
         this.map = map;
-        this.addCss();
-
+        if(options && options.text) {
+            options.text = this.setText(options.text);
+        }
         L.setOptions(this, options);
         this.overwriteFunctions();
 
-        if(this.addControl) {
+        this.render();
+    },
+    setOptions: function(options){
+        if(options && options.text) {
+            options.text = this.setText(options.text);
+        }
+        L.setOptions(this, options);
+        this.render();
+    },
+    render: function(){
+        this.activeMode = '';
+        if(this.toolbarBtn) {
+            this.toolbarBtn.onRemove();
+            this.toolbarBtn = undefined;
+        }
+        if(this.options.showControl) {
+            this.addCss();
             this.createControl();
         }
     },
-    setText(text){
+    setText: function(text){
         if(text.unlock){
             this.options.text.unlock = text.unlock;
         }
@@ -35,6 +53,8 @@ L.PMLock = L.Class.extend({
         if(text.finish){
             this.options.text.finish = text.finish;
         }
+        this.render();
+        return this.options.text;
     },
     enableLock: function(name,changeToolbar = true){
         if(!name){
@@ -62,9 +82,9 @@ L.PMLock = L.Class.extend({
             this.toolbarBtn.toggle(false);
         }
     },
-    toggle: function(changeToolbar=true){
+    toggle: function(name = 'lock', changeToolbar=true){
         if(this.activeMode === ""){
-            this.enableLock('lock',changeToolbar);
+            this.enableLock(name,changeToolbar);
         }else{
             this.disableLock(changeToolbar);
         }
@@ -288,7 +308,11 @@ L.PMLock = L.Class.extend({
         }
     },
     addCss: function () {
-        // Your CSS as text
+        if(this.cssadded){
+            return;
+        }
+        this.cssadded = true;
+
         var lockimg = "data:image/svg+xml;base64,PHN2ZwogICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPgogICAgPHBhdGggZmlsbD0iIzVCNUI1QiIKICAgICAgICAgIGQ9Ik00MDAgMjI0aC0yNHYtNzJDMzc2IDY4LjIgMzA3LjggMCAyMjQgMFM3MiA2OC4yIDcyIDE1MnY3Mkg0OGMtMjYuNSAwLTQ4IDIxLjUtNDggNDh2MTkyYzAgMjYuNSAyMS41IDQ4IDQ4IDQ4aDM1MmMyNi41IDAgNDgtMjEuNSA0OC00OFYyNzJjMC0yNi41LTIxLjUtNDgtNDgtNDh6bS0xMDQgMEgxNTJ2LTcyYzAtMzkuNyAzMi4zLTcyIDcyLTcyczcyIDMyLjMgNzIgNzJ2NzJ6IgogICAgICAgICAgY2xhc3M9IiI+PC9wYXRoPgo8L3N2Zz4=";
         var styles = ".leaflet-pm-toolbar .leaflet-pm-icon-pmLock {background-image: url('"+lockimg+"');margin: 5%;width: 90%;height: 90%;} .leaflet-pm-action.pmLock-active{background-color: #3d3d3d !important;}";
 
