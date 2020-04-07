@@ -35,6 +35,8 @@ h3 {
     padding: 30px;
     max-width: 1000px;
     margin: auto;
+    background-color: #fff;
+    box-shadow: 10px 0px 13px -7px rgba(154, 154, 154, 0.75), -10px 0px 13px -7px rgba(154, 154, 154, 0.75);
 }
 
 .map {
