@@ -15,42 +15,41 @@ You can add the library without the button:
 
 `pmLock = new PMLock(map,{showControl: false})`
 
-
-#####Options
+##### Options
 `pmLock.setOptions(options)`
 ```
 showControl: true | false
 text: {unlock: 'Unlock', lock: 'Lock', title: 'Lock / Unlock Layers',  finish: 'Finish'}
 ```
 
-#####setText
+##### setText
 `pmLock.setText(text)`
 ```
 showControl: true | false
 text: {unlock: 'Unlock', lock: 'Lock', title: 'Lock / Unlock Layers',  finish: 'Finish'}
 ```
 
-#####enableLock
+##### enableLock
 `pmLock.enableLock(name, changeToolbar = true)`
 ```
 name: 'unlock' | 'lock' | '' 
 ```
 
-#####disableLock
+##### disableLock
 `pmLock.disableLock(changeToolbar = true)`
 
-#####toggle
+##### toggle
 enable 'lock' | 'unlock' or disable all ' '
 
 `pmLock.toggle(name = 'lock', changeToolbar=true)`
 
-#####render
+##### render
 `pmLock.render()`
 
-#####getLockedLayers
+##### getLockedLayers
 `pmLock.getLockedLayers()`
 
-#####getUnlockedLayers
+##### getUnlockedLayers
 `pmLock.getUnlockedLayers()`
 
 
