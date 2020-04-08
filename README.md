@@ -9,13 +9,13 @@ Download [pmLock.js](https://raw.githubusercontent.com/Falke-Design/PMLock/maste
 `<script src="./js/pmLock.js"></script>`
 
 ### Init PMLock
-Create the PMLock button after Leaflet Geoman
+Create the L.PMLock button after Leaflet Geoman
 
-`pmLock = new PMLock(map)`
+`pmLock = new L.PMLock(map)`
 
 You can add the library without the button:
 
-`pmLock = new PMLock(map,{showControl: false})`
+`pmLock = new L.PMLock(map,{showControl: false})`
 
 ##### Options
 `pmLock.setOptions(options)`
