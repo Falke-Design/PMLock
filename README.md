@@ -4,9 +4,9 @@ This is a [Leaflet Geoman](https://github.com/geoman-io/leaflet-geoman) Subplugi
 Demo: [PMLock](https://falke-design.github.io/PMLock/)
 
 ### Installation
-Download [pmLock.js](https://raw.githubusercontent.com/Falke-Design/PMLock/master/src/js/pmLock.js) and include them in your project.
+Download [pmLock.js](https://raw.githubusercontent.com/Falke-Design/PMLock/master/js/pmLock.js) and include them in your project.
 
-`<script src="./src/js/pmLock.js"></script>`
+`<script src="./js/pmLock.js"></script>`
 
 ### Init PMLock
 Create the PMLock button after Leaflet Geoman
