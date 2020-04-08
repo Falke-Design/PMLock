@@ -134,4 +134,4 @@ map.fitBounds(b);
 map.pm.enableDraw('Circle',{pathOptions: {pmLock: true}});
 map.pm.disableDraw('Circle');
 
-x = new L.PMLock(map);
+pmLock = new L.PMLock(map);
