@@ -131,4 +131,7 @@ theCollection.addTo(map);
 const b = theCollection.getBounds();
 map.fitBounds(b);
 
-x = new L.PMLock(map,{showControl: true});
+map.pm.enableDraw('Circle',{pathOptions: {pmLock: true}});
+map.pm.disableDraw('Circle');
+
+x = new L.PMLock(map);

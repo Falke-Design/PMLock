@@ -20,6 +20,12 @@ You can add the library without the button:
 
 `pmLock = new L.PMLock(map,{showControl: false})`
 
+### Set lock option by default
+```
+map.pm.enableDraw("Circle",{pathOptions:{pmLock: true}});
+map.pm.disableDraw("Circle");
+```
+
 ##### Options
 `pmLock.setOptions(options)`
 ```
