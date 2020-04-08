@@ -320,7 +320,6 @@ L.PMLock = L.Class.extend({
         styleSheet.type = "text/css";
         styleSheet.innerText = styles;
         document.head.appendChild(styleSheet);
-        console.log(styleSheet)
     }
 
 });
