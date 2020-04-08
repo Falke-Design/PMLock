@@ -8,6 +8,9 @@ Download [pmLock.js](https://raw.githubusercontent.com/Falke-Design/PMLock/maste
 
 `<script src="./js/pmLock.js"></script>`
 
+or use the script over cdn:
+
+`<script src="https://cdn.jsdelivr.net/gh/Falke-Design/PMLock/js/pmLock.js"></script>`
 ### Init PMLock
 Create the L.PMLock button after Leaflet Geoman
 
