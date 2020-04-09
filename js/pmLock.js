@@ -177,53 +177,65 @@ L.PMLock = L.Class.extend({
         };
         this.toolbarBtn = new L.Control.PMButton(lockButton);
         this.map.pm.Toolbar._addButton('pmLockButton', this.toolbarBtn);
+        this.map.pm.Toolbar._showHideButtons = this._extend(this.map.pm.Toolbar._showHideButtons,this._createActionBtn(this),this.map.pm.Toolbar);
         this.map.pm.Toolbar._showHideButtons();
 
-        const actions = [
-            {
-                name: 'lock',
-                text: this.options.text.lock,
-                onClick() {
-                    this.enableLock('lock');
+
+    },
+    _createActionBtn: function(that){
+        return function() {
+            const actions = [
+                {
+                    name: 'lock',
+                    text: that.options.text.lock,
+                    onClick() {
+                        that.enableLock('lock');
+                    },
                 },
-            },
-            {
-                name: 'unlock',
-                text: this.options.text.unlock,
-                onClick() {
-                    this.enableLock('unlock');
+                {
+                    name: 'unlock',
+                    text: that.options.text.unlock,
+                    onClick() {
+                        that.enableLock('unlock');
+                    },
                 },
-            },
-            {
-                name: 'finish',
-                text: this.options.text.finish,
-                onClick() {
-                    this.toolbarBtn._triggerClick();
+                {
+                    name: 'finish',
+                    text: that.options.text.finish,
+                    onClick() {
+                        that.toolbarBtn._triggerClick();
+                    },
                 },
-            },
-        ];
+            ];
 
 
-        var actionContainer = this.toolbarBtn.buttonsDomNode.children[1];
-        actionContainer.innerHTML = "";
-        actions.forEach(action => {
-            var name = action.name;
-            const actionNode = L.DomUtil.create(
-                'a',
-                `leaflet-pm-action action-${name}`,
-                actionContainer
-            );
+            var actionContainer = that.toolbarBtn.buttonsDomNode.children[1];
+            actionContainer.innerHTML = "";
+            actions.forEach(action => {
+                var name = action.name;
+                const actionNode = L.DomUtil.create(
+                    'a',
+                    `leaflet-pm-action action-${name}`,
+                    actionContainer
+                );
 
-            if (action.text) {
-                actionNode.innerHTML = action.text;
-            } else {
-                actionNode.innerHTML = "Text not translated!";
-            }
+                if (action.text) {
+                    actionNode.innerHTML = action.text;
+                } else {
+                    actionNode.innerHTML = "Text not translated!";
+                }
 
 
-            L.DomEvent.addListener(actionNode, 'click', action.onClick, this);
-            L.DomEvent.disableClickPropagation(actionNode);
-        });
+                L.DomEvent.addListener(actionNode, 'click', action.onClick, that);
+                L.DomEvent.disableClickPropagation(actionNode);
+            });
+        }
+    },
+    _extend: function(fn,code,that){
+        return function(){
+            fn.apply(that,arguments);
+            code.apply(that,arguments);
+        }
     },
     overwriteFunctions: function () {
         var map = this.map;

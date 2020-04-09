@@ -68,3 +68,10 @@ a:hover{
         opacity: 50%;
     }
 }
+
+pre {
+    white-space: pre-wrap;
+    background: #ececec;
+    padding: 15px;
+    border-radius: 10px;
+}
