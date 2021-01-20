@@ -153,38 +153,18 @@ L.PMLock = L.Class.extend({
         return this.findLayers(this.map);
     },
     createControl: function(){
-        this.map.options.position = this.map.pm.Toolbar.options.position;
-        this.map.pm.Toolbar.options['pmLockButton'] = true;
-        this.lockContainer = L.DomUtil.create(
-            'div',
-            'leaflet-pm-toolbar leaflet-pm-options leaflet-bar leaflet-control'
-        );
-
+        var that = this;
         const lockButton = {
+            name: 'pmLockButton',
             className: 'control-icon leaflet-pm-icon-pmLock',
-            title: this.options.text.title,
-            onClick: () => {
-            },
+            title: that.options.text.title,
             afterClick: () => {
-                this.toggle();
+                that.toggle();
             },
-            tool: 'edit',
-            doToggle: true,
+            block: 'edit',
+            toogle: true,
             toggleStatus: false,
-            disableOtherButtons: true,
-            position: this.options.position,
-            actions: [],
-        };
-        this.toolbarBtn = new L.Control.PMButton(lockButton);
-        this.map.pm.Toolbar._addButton('pmLockButton', this.toolbarBtn);
-        this.map.pm.Toolbar._showHideButtons = this._extend(this.map.pm.Toolbar._showHideButtons,this._createActionBtn(this),this.map.pm.Toolbar);
-        this.map.pm.Toolbar._showHideButtons();
-
-
-    },
-    _createActionBtn: function(that){
-        return function() {
-            const actions = [
+            actions: [
                 {
                     name: 'lock',
                     text: that.options.text.lock,
@@ -206,36 +186,9 @@ L.PMLock = L.Class.extend({
                         that.toolbarBtn._triggerClick();
                     },
                 },
-            ];
-
-
-            var actionContainer = that.toolbarBtn.buttonsDomNode.children[1];
-            actionContainer.innerHTML = "";
-            actions.forEach(action => {
-                var name = action.name;
-                const actionNode = L.DomUtil.create(
-                    'a',
-                    `leaflet-pm-action action-${name}`,
-                    actionContainer
-                );
-
-                if (action.text) {
-                    actionNode.innerHTML = action.text;
-                } else {
-                    actionNode.innerHTML = "Text not translated!";
-                }
-
-
-                L.DomEvent.addListener(actionNode, 'click', action.onClick, that);
-                L.DomEvent.disableClickPropagation(actionNode);
-            });
-        }
-    },
-    _extend: function(fn,code,that){
-        return function(){
-            fn.apply(that,arguments);
-            code.apply(that,arguments);
-        }
+            ],
+        };
+        this.toolbarBtn = this.map.pm.Toolbar.createCustomControl(lockButton);
     },
     overwriteFunctions: function () {
         var map = this.map;
@@ -245,7 +198,7 @@ L.PMLock = L.Class.extend({
             const options = {
                 snappable: this._globalSnappingEnabled,
                 ...o
-            }
+            };
 
             const status = true;
 
@@ -264,6 +217,9 @@ L.PMLock = L.Class.extend({
                 this.throttledReInitEdit = L.Util.throttle(this.handleLayerAdditionInGlobalEditMode, 100, this)
             }
 
+            // save the added layers into the _addedLayers array, to read it later out
+            this._addedLayers = [];
+            this.map.on('layeradd', this._layerAdded, this);
             // handle layers that are added while in removal mode
             this.map.on('layeradd', this.throttledReInitEdit, this);
 
@@ -294,7 +250,6 @@ L.PMLock = L.Class.extend({
         map.pm.enableGlobalRemovalMode = function enableGlobalRemovalMode() {
             const isRelevant = layer =>
                 layer.pm &&
-                !(layer.pm.options && layer.pm.options.preventMarkerRemoval) &&
                 !(layer instanceof L.LayerGroup) &&
                 layer.options.pmLock !== true;
 
@@ -302,6 +257,7 @@ L.PMLock = L.Class.extend({
             // handle existing layers
             this.map.eachLayer(layer => {
                 if (isRelevant(layer)) {
+                    layer.pm.disable();
                     layer.on('click', this.removeLayer, this);
                 }
             });
