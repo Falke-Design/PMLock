@@ -1,11 +1,8 @@
 /* eslint-disable */
-// Provide your access token
-const accessToken =
-  'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
 
 // set mapbox tile layer
 const mapboxTiles1 = L.tileLayer(
-  `https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=${accessToken}`,
+  'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
   {
     attribution:
       '&copy; <a href="https://www.mapbox.com/feedback/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -114,7 +111,7 @@ const geoJsonData = {
 };
 
 const theCollection = L.geoJson(geoJsonData, {
-  pointToLayer: (feature, latlng) => {
+  pointToLayer: function(feature, latlng) {
     if (feature.properties.customGeometry) {
       return new L.Circle(latlng, feature.properties.customGeometry.radius, {pmLock: true});
     } else {
@@ -127,7 +124,6 @@ const theCollection = L.geoJson(geoJsonData, {
 });
 
 theCollection.addTo(map);
-
 const b = theCollection.getBounds();
 map.fitBounds(b);
 
