@@ -154,7 +154,6 @@ L.PMLock = L.Class.extend({
     },
     createControl: function(){
         var that = this;
-        debugger;
         const lockButton = {
             name: 'pmLockButton',
             className: 'control-icon leaflet-pm-icon-pmLock',
