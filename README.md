@@ -1,3 +1,6 @@
+# Deprecated! Implemented in Leaflet-Geoman Core
+Implemented in Leaflet-Geoman with [Release 2.11.0](https://github.com/geoman-io/leaflet-geoman/releases/tag/2.11.0). This Library will not longer supported
+
 # Leaflet PMLock: Lock / Unlock Layers
 This is a [Leaflet Geoman](https://github.com/geoman-io/leaflet-geoman) Subplugin 
 
